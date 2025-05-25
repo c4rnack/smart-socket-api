@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 
@@ -6,6 +8,9 @@ app.use(express.json());
 const {Pool} = require('pg');
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false,
+    }
 });
 
 app.get('/status/:id', async (req, res) => {
