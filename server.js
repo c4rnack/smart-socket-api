@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
-const cors = require('cors');
+//const cors = require('cors');
 app.use(cors());
 
 app.use(express.json());
@@ -28,7 +28,7 @@ app.get('/status/:id', async (req, res) => {
         if (result.rows.length === 0) {
             return res.status(404).json({error: 'Socket not found'});
         }
-        res.json({is_on: result.rows[0].is_on});
+        res.status(200).json({is_on: result.rows[0].is_on});
     }
     catch (err) {
         console.log(err);
@@ -54,7 +54,7 @@ app.post('/status', async (req, res) => {
         if (result.rowCount === 0) {
             return res.status(404).json({error: 'Socket not found'});
         }
-        res.json(result.rows[0]);
+        res.status(200).json(result.rows[0]);
     }
     catch (err) {
         console.log(err);
